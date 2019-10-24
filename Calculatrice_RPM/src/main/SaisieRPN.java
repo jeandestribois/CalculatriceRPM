@@ -1,10 +1,12 @@
+package main;
 import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.ArrayList; 
 
 public class SaisieRPN {
+	final float MAX_VALUE = 100000000;
+	final float MIN_VALUE = (float) 0.0000001;
 	
 	private Scanner scan = new Scanner(System.in);
-	private int compteur = 0;
 	private MoteurRPN moteur = new MoteurRPN();
 	
 	SaisieRPN()
@@ -13,7 +15,7 @@ public class SaisieRPN {
 				+ "sous la forme RPN en validant par à chaque fois par la touche <entrée>");
 	}
 	
-	public boolean getNext()
+	public boolean getNext() throws OperationException
 	{
 		String s = this.scan.nextLine();
 		try {
@@ -21,7 +23,10 @@ public class SaisieRPN {
 		}
 		catch (NumberFormatException e){
 			if(s.equals("exit")) return false;
-			else if (this.compteur >= 2)
+			else if(this.moteur.getOperandes().size() < 2) {
+				throw new OperationException("Erreur : nombre d'operandes insuffisant");
+			}
+			else
 			{
 				char c = s.charAt(0);
 				if(c=='+')	this.moteur.operation(Operation.PLUS);
@@ -29,17 +34,15 @@ public class SaisieRPN {
 				else if(c=='*')	this.moteur.operation(Operation.MULT);
 				else if(c=='/') this.moteur.operation(Operation.DIV);
 				else {
-					System.err.println("Erreur : l'argument renseigné n'est pas valide");
-					System.exit(1);
+					throw new OperationException("Erreur : l'argument renseigné n'est pas valide");
 				}
 				return true;
 			}
-			else {
-				System.err.println("Erreur : le nombre d'opérandes est insuffisant");
-				System.exit(1);
-			}
 		}
-		this.compteur++;
+		float operande = Float.valueOf(s);
+		if(Math.abs(operande) < this.MIN_VALUE || Math.abs(operande) > MAX_VALUE) {
+			throw new OperationException("La valeur entrée en argument est en dehors de l'interval accepté");
+		}
 		this.moteur.nouvelleOperande(Float.valueOf(s));
 		return true;
 	}

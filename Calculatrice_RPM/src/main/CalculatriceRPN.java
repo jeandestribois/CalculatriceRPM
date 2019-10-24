@@ -1,6 +1,7 @@
+package main;
 
 public enum CalculatriceRPN {;
-	public static void main(String... args)
+	public static void main(String... args) throws OperationException
 	{
 		SaisieRPN saisie = new SaisieRPN();
 		while(saisie.getNext())

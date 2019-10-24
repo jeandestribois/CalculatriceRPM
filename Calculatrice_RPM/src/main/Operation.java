@@ -1,3 +1,6 @@
+package main;
+
+import main.OperationException;
 
 public enum Operation {
 	PLUS('+') {
@@ -10,16 +13,12 @@ public enum Operation {
 		@Override public float eval(float x, float y) { return x * y; }
 	},
 	DIV('/') {
-		@Override public float eval(float x, float y) {
-			float z = 0;
-			try {
-				z = x / y;
+		@Override public float eval(float x, float y) throws OperationException {
+			if(y == 0)
+			{
+				throw new OperationException("Erreur : division par 0 impossible");
 			}
-			catch(ArithmeticException e) {
-				System.err.println("Erreur : Division par 0 impossible");
-				System.exit(1);
-			}
-			return z; 
+			return x/y;
 		}
 	};
 
@@ -32,5 +31,5 @@ public enum Operation {
 	
 	public char getSymbole() { return this.symbole; }
 	
-	public abstract float eval(float x, float y);
+	public abstract float eval(float x, float y) throws OperationException;
 }
