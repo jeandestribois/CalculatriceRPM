@@ -1,6 +1,6 @@
 package main;
 
-import main.OperationException;
+import exception.OperationException;
 
 public enum Operation {
 	PLUS('+') {
@@ -23,7 +23,7 @@ public enum Operation {
 	};
 
 	
-	private char symbole = ' ';
+	private char symbole;
 	
 	Operation(char symbole) {
 		this.symbole=symbole;

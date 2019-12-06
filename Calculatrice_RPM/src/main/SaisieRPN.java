@@ -1,5 +1,8 @@
 package main;
 import java.util.Scanner;
+
+import exception.OperationException;
+
 import java.util.ArrayList; 
 
 public class SaisieRPN {
@@ -40,7 +43,7 @@ public class SaisieRPN {
 			}
 		}
 		float operande = Float.valueOf(s);
-		if(Math.abs(operande) < this.MIN_VALUE || Math.abs(operande) > MAX_VALUE) {
+		if((Math.abs(operande) < this.MIN_VALUE && operande!=0) || Math.abs(operande) > MAX_VALUE) {
 			throw new OperationException("La valeur entrée en argument est en dehors de l'interval accepté");
 		}
 		this.moteur.nouvelleOperande(Float.valueOf(s));

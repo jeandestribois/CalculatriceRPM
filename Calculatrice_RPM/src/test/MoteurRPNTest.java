@@ -23,22 +23,5 @@ class MoteurRPNTest {
 		m.nouvelleOperande(y);
 		assertEquals(l, m.getOperandes(), "insertion dans la liste d'operandes");
 	}
-	
-	/**@Test
-	void testOperation()
-	{
-		Operation op = Operation.DIV;
-		MoteurRPN m = new MoteurRPN();
-		float x = 5;
-		float y = 6;
-		ArrayList<Float> l = new ArrayList<>();
-		l.add(x);
-		l.add(y);
-		m.nouvelleOperande(x);
-		m.nouvelleOperande(y);
-		m.operation(op);
-		l.
-		
-	}*/
 
 }

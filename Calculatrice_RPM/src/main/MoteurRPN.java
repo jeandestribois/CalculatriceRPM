@@ -1,6 +1,8 @@
 package main;
 import java.util.ArrayList;
 
+import exception.OperationException;
+
 public class MoteurRPN {
 	
 	private ArrayList<Float> operandes = new ArrayList<>();
